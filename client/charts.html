@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Charts</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon">
+                    <img src="data:image/png;base64,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" alt="Logo" width="50" height="50">
+                </div>
+                <div class="sidebar-brand-text mx-3">Urbia Services</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Dispositivos
+            </div>
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item active">
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Charts</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tables</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - Alerts -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                <!-- Counter - Alerts -->
+                                <span class="badge badge-danger badge-counter">3+</span>
+                            </a>
+                            <!-- Dropdown - Alerts -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">
+                                    Alerts Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 12, 2019</div>
+                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-success">
+                                            <i class="fas fa-donate text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 7, 2019</div>
+                                        $290.29 has been deposited into your account!
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-warning">
+                                            <i class="fas fa-exclamation-triangle text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 2, 2019</div>
+                                        Spending Alert: We've noticed unusually high spending for your account.
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                            </div>
+                        </li>
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <!-- Título como Dropdown sin Flecha -->
+                        <div class="dropdown no-arrow">
+                            <button class="btn btn-link h3 mb-0 text-gray-800 dropdown-toggle" type="button"
+                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Dispositivo 1
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <!-- Lista de dispositivos -->
+                                <a class="dropdown-item" href="#" onclick="changeDevice('Dispositivo 1')">Dispositivo
+                                    1</a>
+                                <a class="dropdown-item" href="#" onclick="changeDevice('Dispositivo 2')">Dispositivo
+                                    2</a>
+                                <a class="dropdown-item" href="#" onclick="changeDevice('Dispositivo 3')">Dispositivo
+                                    3</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- CONSUMO ACTUAL MEDIO  -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Consumo actual</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">40 KW</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Consumo diario -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Consumo diario</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">250 KW</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Consumo Semanal -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Consumo
+                                                Semanal
+                                            </div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">1200KW
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="progress progress-sm mr-2">
+                                                        <div class="progress-bar bg-info" role="progressbar"
+                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                            aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Total Alertas-->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                Total Alertas</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">6</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Row -->
+
+                    <div class="row">
+                        <!-- Area Chart -->
+                        <div class="col-xl-8 col-lg-7">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Consumo Eléctrico</h6>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Dropdown Header:</div>
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <canvas id="myAreaChartInd"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pie Chart -->
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Alertas</h6>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Dropdown Header:</div>
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-pie pt-4 pb-2">
+                                        <canvas id="myPieChart"></canvas>
+                                    </div>
+                                    <div class="mt-4 text-center small">
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-primary"></i> Anomalías
+                                        </span>
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-success"></i> Averías
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Intensidad</h6>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Dropdown Header:</div>
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-bar">
+                                        <canvas id="myBarChart"></canvas>
+                                    </div>
+                                    <hr>
+                                    Styling for the bar chart can be found in the
+                                    <code>/js/demo/chart-bar-demo.js</code> file.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 col-lg-7">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Consumo Fantasma</h6>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Dropdown Header:</div>
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <canvas id="myAreaChartGhost"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.container-fluid -->
+
+                    </div>
+                    <!-- End of Main Content -->
+
+                    <!-- Footer -->
+                    <footer class="sticky-footer bg-white">
+                        <div class="container my-auto">
+                            <div class="copyright text-center my-auto">
+                                <span>Copyright &copy; Your Website 2020</span>
+                            </div>
+                        </div>
+                    </footer>
+                    <!-- End of Footer -->
+
+                </div>
+                <!-- End of Content Wrapper -->
+
+            </div>
+            <!-- End of Page Wrapper -->
+
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
+
+            <!-- Logout Modal-->
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            <a class="btn btn-primary" href="login.html">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bootstrap core JavaScript-->
+            <script src="vendor/jquery/jquery.min.js"></script>
+            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+            <!-- Core plugin JavaScript-->
+            <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+            <!-- Custom scripts for all pages-->
+            <script src="js/sb-admin-2.min.js"></script>
+
+            <!-- Page level plugins -->
+            <script src="vendor/chart.js/Chart.min.js"></script>
+
+            <!-- Page level custom scripts -->
+            <script src="js/demo/chart-area-demo-ind.js"></script>
+            <script src="js/demo/chart-area-demo-ghost.js"></script>
+            <script src="js/demo/chart-pie-demo.js"></script>
+            <script src="js/demo/chart-bar-demo.js"></script>
+            <script>
+                function changeDevice(deviceName) {
+                    // Cambiar el texto del botón con el nombre del dispositivo seleccionado
+
+                    // Recargar la página para aplicar los cambios
+                    location.reload();
+                    document.getElementById("dropdownMenuButton").innerText = deviceName;
+                }
+            </script>
+
+</body>
+
+</html>
