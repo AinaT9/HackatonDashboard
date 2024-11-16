@@ -32,13 +32,17 @@ var ctx = document.getElementById("myBarChart");
 var myBarChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ["January", "February", "March", "April", "May", "June"],
+    labels: ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"],
     datasets: [{
       label: "Revenue",
       backgroundColor: "#4e73df",
       hoverBackgroundColor: "#2e59d9",
       borderColor: "#4e73df",
-      data: [4215, 5312, 6251, 7841, 9821, 14984],
+      data: [
+        100, 150, 200, 180, 220, 250, // Alta actividad en las horas nocturnas (00:00 a 06:00)
+        5, 5, 5, 5, 5, 35, 5, 5, 5, 5, // Baja actividad en el día (07:00 a 17:00)
+        200, 220, 250, 300, 320, 350, // Alta actividad en la tarde-noche (18:00 a 23:00)
+      ],
     }],
   },
   options: {
@@ -52,11 +56,8 @@ var myBarChart = new Chart(ctx, {
       }
     },
     scales: {
-      xAxes: [{
-        time: {
-          unit: 'month'
-        },
-        gridLines: {
+      x: {
+        grid: {
           display: false,
           drawBorder: false
         },
@@ -64,26 +65,26 @@ var myBarChart = new Chart(ctx, {
           maxTicksLimit: 6
         },
         maxBarThickness: 25,
-      }],
-      yAxes: [{
+      },
+      y: {
         ticks: {
           min: 0,
-          max: 15000,
-          maxTicksLimit: 5,
+          max: 120, // Adjust to fit your data range
+          maxTicksLimit: 6,
           padding: 10,
           // Include a dollar sign in the ticks
-          callback: function(value, index, values) {
-            return '$' + number_format(value);
+          callback: function(value) {
+            return '$' + value.toLocaleString(); // Format as currency
           }
         },
-        gridLines: {
+        grid: {
           color: "rgb(234, 236, 244)",
           zeroLineColor: "rgb(234, 236, 244)",
           drawBorder: false,
           borderDash: [2],
           zeroLineBorderDash: [2]
         }
-      }],
+      }
     },
     legend: {
       display: false
@@ -103,7 +104,7 @@ var myBarChart = new Chart(ctx, {
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+          return datasetLabel + ': $' + tooltipItem.raw.toLocaleString(); // Format as currency in tooltips
         }
       }
     },
