@@ -3,8 +3,6 @@ Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,Bli
 Chart.defaults.global.defaultFontColor = '#858796';
 
 function number_format(number, decimals, dec_point, thousands_sep) {
-  // *     example: number_format(1234.56, 2, ',', ' ');
-  // *     return: '1 234,56'
   number = (number + '').replace(',', '').replace(' ', '');
   var n = !isFinite(+number) ? 0 : +number,
     prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
@@ -15,7 +13,6 @@ function number_format(number, decimals, dec_point, thousands_sep) {
       var k = Math.pow(10, prec);
       return '' + Math.round(n * k) / k;
     };
-  // Fix for IE parseFloat(0.55).toFixed(0) = 0;
   s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
   if (s[0].length > 3) {
     s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
@@ -33,53 +30,69 @@ var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [{
-      label: "Earnings",
-      lineTension: 0.3,
-      backgroundColor: "rgba(78, 115, 223, 0.05)",
-      borderColor: "rgba(78, 115, 223, 1)",
-      pointRadius: 3,
-      pointBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointBorderColor: "rgba(78, 115, 223, 1)",
-      pointHoverRadius: 3,
-      pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-      pointHitRadius: 10,
-      pointBorderWidth: 2,
-      data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
-    },
-    {
-      label: "Expenses",
-      lineTension: 0.3,
-      backgroundColor: "rgba(28, 200, 138, 0.05)",
-      borderColor: "rgba(28, 200, 138, 1)",
-      pointRadius: 3,
-      pointBackgroundColor: "rgba(28, 200, 138, 1)",
-      pointBorderColor: "rgba(28, 200, 138, 1)",
-      pointHoverRadius: 3,
-      pointHoverBackgroundColor: "rgba(28, 200, 138, 1)",
-      pointHoverBorderColor: "rgba(28, 200, 138, 1)",
-      pointHitRadius: 10,
-      pointBorderWidth: 2,
-      data: [5000, 7000, 8000, 6000, 7000, 9000, 10000, 12000, 11000, 13000, 15000, 16000],
-    },
-    {
-      label: "Profit",
-      lineTension: 0.3,
-      backgroundColor: "rgba(231, 74, 59, 0.05)",
-      borderColor: "rgba(231, 74, 59, 1)",
-      pointRadius: 3,
-      pointBackgroundColor: "rgba(231, 74, 59, 1)",
-      pointBorderColor: "rgba(231, 74, 59, 1)",
-      pointHoverRadius: 3,
-      pointHoverBackgroundColor: "rgba(231, 74, 59, 1)",
-      pointHoverBorderColor: "rgba(231, 74, 59, 1)",
-      pointHitRadius: 10,
-      pointBorderWidth: 2,
-      data: [3000, 2000, 4000, 9000, 8000, 10000, 5000, 7000, 6000, 8000, 10000, 12000],
-    }
-  ],
+    labels: ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"],  // Horas del día
+    datasets: [
+      {
+        label: "Dispositivo 4",
+        lineTension: 0.3,
+        backgroundColor: "rgba(78, 115, 223, 0.05)",
+        borderColor: "rgba(78, 115, 223, 1)",
+        pointRadius: 3,
+        pointBackgroundColor: "rgba(78, 115, 223, 1)",
+        pointBorderColor: "rgba(78, 115, 223, 1)",
+        pointHoverRadius: 3,
+        pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+        pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+        pointHitRadius: 10,
+        pointBorderWidth: 2,
+        data: [50, 52, 54, 56, 58, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120, 130, 140, 150, 160, 170, 180], // Datos kWh para la farola
+      },
+      {
+        label: "Dispositivo 1",
+        lineTension: 0.3,
+        backgroundColor: "rgba(28, 200, 138, 0.05)",
+        borderColor: "rgba(28, 200, 138, 1)",
+        pointRadius: 3,
+        pointBackgroundColor: "rgba(28, 200, 138, 1)",
+        pointBorderColor: "rgba(28, 200, 138, 1)",
+        pointHoverRadius: 3,
+        pointHoverBackgroundColor: "rgba(28, 200, 138, 1)",
+        pointHoverBorderColor: "rgba(28, 200, 138, 1)",
+        pointHitRadius: 10,
+        pointBorderWidth: 2,
+        data: [0, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100, 1150, 1200], // Datos simulados para Earnings en kWh
+      },
+      {
+        label: "Dispositivo 2",
+        lineTension: 0.3,
+        backgroundColor: "rgba(231, 74, 59, 0.05)",
+        borderColor: "rgba(231, 74, 59, 1)",
+        pointRadius: 3,
+        pointBackgroundColor: "rgba(231, 74, 59, 1)",
+        pointBorderColor: "rgba(231, 74, 59, 1)",
+        pointHoverRadius: 3,
+        pointHoverBackgroundColor: "rgba(231, 74, 59, 1)",
+        pointHoverBorderColor: "rgba(231, 74, 59, 1)",
+        pointHitRadius: 10,
+        pointBorderWidth: 2,
+        data: [50, 70, 90, 110, 130, 150, 170, 190, 210, 230, 250, 270, 290, 310, 330, 350, 370, 390, 410, 430, 450, 470, 490, 510], // Datos simulados para Expenses en kWh
+      },
+      {
+        label: "Dispositivo 3",
+        lineTension: 0.3,
+        backgroundColor: "rgba(255, 159, 64, 0.05)",
+        borderColor: "rgba(255, 159, 64, 1)",
+        pointRadius: 3,
+        pointBackgroundColor: "rgba(255, 159, 64, 1)",
+        pointBorderColor: "rgba(255, 159, 64, 1)",
+        pointHoverRadius: 3,
+        pointHoverBackgroundColor: "rgba(255, 159, 64, 1)",
+        pointHoverBorderColor: "rgba(255, 159, 64, 1)",
+        pointHitRadius: 10,
+        pointBorderWidth: 2,
+        data: [30, 50, 60, 90, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480], // Datos simulados para Profit en kWh
+      }
+    ]
   },
   options: {
     maintainAspectRatio: false,
@@ -93,9 +106,6 @@ var myLineChart = new Chart(ctx, {
     },
     scales: {
       xAxes: [{
-        time: {
-          unit: 'date'
-        },
         gridLines: {
           display: false,
           drawBorder: false
@@ -108,9 +118,8 @@ var myLineChart = new Chart(ctx, {
         ticks: {
           maxTicksLimit: 5,
           padding: 10,
-          // Include a dollar sign in the ticks
           callback: function(value, index, values) {
-            return '$' + number_format(value);
+            return value + ' kWh'; // Mostrar kWh en el eje Y
           }
         },
         gridLines: {
@@ -120,10 +129,10 @@ var myLineChart = new Chart(ctx, {
           borderDash: [2],
           zeroLineBorderDash: [2]
         }
-      }],
+      }]
     },
     legend: {
-      display: false
+      display: true // Mostrar la leyenda
     },
     tooltips: {
       backgroundColor: "rgb(255,255,255)",
@@ -142,7 +151,7 @@ var myLineChart = new Chart(ctx, {
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+          return datasetLabel + ': ' + tooltipItem.yLabel + ' kWh';
         }
       }
     }
